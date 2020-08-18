@@ -1,0 +1,219 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section head{
+    <script type="text/javascript">
+    function carregaData(opdata) {
+        var date_input = $('input[name="' + opdata + '"]'); //our date input has the name "date"
+        var container = $('.bootstrap-iso form').length > 0 ? $('.bootstrap-iso form').parent() : "body";
+        var options = {
+            format: 'dd/mm/yyyy',
+            container: container,
+            todayHighlight: true,
+            autoclose: true,
+        };
+        date_input.datepicker(options);
+    }
+
+    $(document).ready(function () {
+        carregaData("dtini");
+        carregaData("dtfim");
+        carregaData("Dtnasc");
+    })
+    </script>
+
+}
+
+@model apptotal.Models.UsuarioViewModels
+<br />
+<div class="normal" style="border:0px solid #000;height:auto;">
+    <div id="wrap">
+        <center>
+            @if ((ViewBag.message != null) && (ViewBag.message != ""))
+            {
+                <div class="form-group input-group" style="width:500px">
+                    <div class="alert alert-danger fade in">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <strong>ATENÇÃO! </strong><b>@ViewBag.message</b>
+                    </div>
+                </div>
+            }
+            <div class="panel panel-danger" style="width:98%">
+                <!-- Default panel contents -->
+                <div class="panel-heading" style="text-align:left;background-color:#E33733;color:#fff;">
+                    <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                        <tr>
+                            <td style="text-align:left"><span class="glyphicon glyphicon-th-list"></span> @ViewBag.Descrition</td>
+                            <td style="text-align:right">
+                                <button type="submit" class="btn btn-default" title="Pesquisa avançada" alt="Pesquisa avançada" style="text-align:right;cursor:pointer" onclick="javascript:filtroA();"><span class="glyphicon glyphicon-zoom-in"></span></button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="panel-body" id="filtros" style="display:@ViewBag.mostrafiltro">
+                    <div class="panel panel-default">
+                        <div class="panel-heading" style="text-align:left;background-color:#E33733;color:#fff;">
+                            <span class="glyphicon glyphicon-search"></span> <label>Filtro</label>
+                        </div>
+                        <div class="panel-body">
+                            @using (Html.BeginForm()){
+                            <table width="99%" cellpadding="0" cellspacing="0" border="0">
+                                <tr>
+                                    <td>&nbsp;&nbsp;@Html.LabelFor(model => model.codigo)</td>
+                                    <td>
+                                        @Html.TextBoxFor(model => model.codigo, new { @class = "form-control", style = "width:200px;", maxlength = "7" })
+                                        <div class="text-danger">
+                                            @Html.ValidationMessageFor(model => model.codigo)
+                                        </div>
+                                    </td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td><label>@Html.LabelFor(model => model.Dtnasc)</label></td>
+                                    <td>
+                                        <div class="input-group">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-calendar">
+                                                </i>
+                                            </div>
+                                            @Html.EditorFor(model => model.Dtnasc, new { htmlAttributes = new { @class = "form-control", placeholder = "DD/MM/YYYY", @name = "Dtnasc", @style = "width:162px" }})
+                                        </div>
+                                    </td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;&nbsp;<label>@Html.LabelFor(model => model.dtini)</label></td>
+                                    <td>
+                                        <div class="input-group">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-calendar">
+                                                </i>
+                                            </div>
+                                            @Html.EditorFor(model => model.dtini, new { htmlAttributes = new { @class = "form-control", placeholder = "DD/MM/YYYY", @name = "dtini", @style = "width:162px" } })
+                                        </div>
+                                    </td>
+                                    <td>&nbsp;&nbsp;<label>@Html.LabelFor(model => model.dtfim)</label></td>
+                                    <td>
+                                        <div class="input-group">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-calendar">
+                                                </i>
+                                            </div>
+                                            @Html.EditorFor(model => model.dtfim, new { htmlAttributes = new { @class = "form-control", placeholder = "DD/MM/YYYY", @name = "dtfim", @style = "width:162px" } })
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left">&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td style="text-align:right">
+                                        &nbsp;<button type="submit" onclick="javascript:LoadPagina();" class="btn btn-danger"><span class="glyphicon glyphicon-search"></span> PESQUISAR</button>
+                                    </td>
+                                </tr>
+                            </table>
+                            }
+
+                        </div>
+                    </div>
+
+                </div>
+                <p>
+                    <div class="panel panel-default" style="width:99%;border:0px;">
+                        <table id="example" class="table table-striped table-bordered table-hover" cellspacing="0">
+                            <thead>
+                                <tr style="background-color:#E33733;color:#fff;">
+                                    <th>#ID</th>
+                                    <th><label>Nome</label></th>
+                                    <th><label>Dt.nascimento</label></th>
+                                    <th><label>Ação</label></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                @if (ViewBag.Lista != null)
+                                {
+                                    Int32 conta = 1;
+                                    foreach (var c in ViewBag.Lista)
+                                    {
+                                <tr style="cursor:pointer">
+                                    <td>&nbsp;@conta</td>
+                                    <td>&nbsp;@c.ID</td>
+                                    <td>&nbsp;@c.Nome</td>
+                                    <td>&nbsp;@String.Format("{0:dd/MM/yyyy}", c.Dtnasc)</td>
+                                    <td>
+                                        &nbsp;
+                                        <button type="submit" onclick="javascript: LoadPagina();" class="btn btn-danger"><span class="glyphicon glyphicon-edit" alt="Editar registro @c.id" title="Editar registro @c.id"></span></button>&nbsp;<button type="button" onclick="javascript:document.getElementById('registro').value='@c.ID'" class="btn btn-danger" data-toggle="modal" data-target="#deletarModal"><span class="glyphicon glyphicon-erase" alt="Excluir registro" title="Excluir registro @c.ID"></span></button>
+                                    </td>
+                                </tr>
+                                        conta = conta + 1;
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </p>
+            </div>
+            <br /><br />
+        </center>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="deletarModal" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Atenção</h4>
+            </div>
+            <div class="modal-body">
+                <p>Deseja excluir o registro selecionado?</p>
+                <button type="submit" onclick="" class="btn btn-danger">OK</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                <input type="hidden" id="registro" name="registro" />
+            </div>
+            <div class="modal-footer">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="deletarModalall" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Atenção</h4>
+            </div>
+            <div class="modal-body">
+                <p>Deseja excluir todos os registros?</p>
+                <button type="submit" onclick="" class="btn btn-danger">OK</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                <input type="hidden" id="registro" name="registro" />
+            </div>
+            <div class="modal-footer">
+
+            </div>
+        </div>
+    </div>
+</div>

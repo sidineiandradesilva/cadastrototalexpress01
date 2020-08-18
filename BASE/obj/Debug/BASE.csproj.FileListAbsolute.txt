@@ -1,0 +1,5 @@
+C:\Users\sidin\source\repos\apptotal\BASE\bin\Debug\BASE.dll
+C:\Users\sidin\source\repos\apptotal\BASE\bin\Debug\BASE.pdb
+C:\Users\sidin\source\repos\apptotal\BASE\obj\Debug\BASE.csproj.CoreCompileInputs.cache
+C:\Users\sidin\source\repos\apptotal\BASE\obj\Debug\BASE.dll
+C:\Users\sidin\source\repos\apptotal\BASE\obj\Debug\BASE.pdb

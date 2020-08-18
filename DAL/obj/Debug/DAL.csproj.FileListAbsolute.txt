@@ -1,0 +1,9 @@
+C:\Users\sidin\source\repos\apptotal\DAL\bin\Debug\DAL.dll
+C:\Users\sidin\source\repos\apptotal\DAL\bin\Debug\DAL.pdb
+C:\Users\sidin\source\repos\apptotal\DAL\bin\Debug\BASE.dll
+C:\Users\sidin\source\repos\apptotal\DAL\bin\Debug\BASE.pdb
+C:\Users\sidin\source\repos\apptotal\DAL\obj\Debug\DAL.csprojAssemblyReference.cache
+C:\Users\sidin\source\repos\apptotal\DAL\obj\Debug\DAL.csproj.CoreCompileInputs.cache
+C:\Users\sidin\source\repos\apptotal\DAL\obj\Debug\DAL.csproj.CopyComplete
+C:\Users\sidin\source\repos\apptotal\DAL\obj\Debug\DAL.dll
+C:\Users\sidin\source\repos\apptotal\DAL\obj\Debug\DAL.pdb
